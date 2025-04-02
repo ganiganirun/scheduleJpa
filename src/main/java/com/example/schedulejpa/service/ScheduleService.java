@@ -37,4 +37,27 @@ public class ScheduleService {
         .map(ScheduleResponseDto::toDto)
         .toList();
   }
+
+  public ScheduleResponseDto findById(Long id) {
+
+    Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
+
+    return new ScheduleResponseDto(findSchedule.getId(), findSchedule.getUsername(), findSchedule.getTitle(), findSchedule.getContents(), findSchedule.getModifiedAt());
+  }
+
+  public ScheduleResponseDto updateSchedule(Long id, String username, String title, String contents) {
+
+    Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
+
+    findSchedule.updateSchedule(username,title,contents);
+
+    return new ScheduleResponseDto(findSchedule.getId(),findSchedule.getUsername(),findSchedule.getTitle(),findSchedule.getContents(),findSchedule.getModifiedAt());
+  }
+
+  public void deleteSchedule(Long id) {
+
+    Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
+
+    scheduleRepository.delete(findSchedule);
+  }
 }
