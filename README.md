@@ -18,19 +18,30 @@
       - 작성일, 수정일 필드는 JPA Auditing을 활용한다.
 4. 동작
    - 일정 등록
-![스크린샷 2025-04-02 오후 7 45 32](https://github.com/user-attachments/assets/47fd0074-a036-40c6-88ac-a4e1cd3c0111)
-![스크린샷 2025-04-02 오후 7 45 50](https://github.com/user-attachments/assets/aa6f0c57-97bb-4aea-84ac-d530d26b6c8f)
+     
+    ![스크린샷 2025-04-02 오후 7 45 32](https://github.com/user-attachments/assets/47fd0074-a036-40c6-88ac-a4e1cd3c0111)
+    ![스크린샷 2025-04-02 오후 7 45 50](https://github.com/user-attachments/assets/aa6f0c57-97bb-4aea-84ac-d530d26b6c8f)
+
+
 
    - 전체 일정 조회
-![스크린샷 2025-04-02 오후 7 46 11](https://github.com/user-attachments/assets/a4d6b7a4-1417-420f-82de-07f88e018c4a)
+     
+    ![스크린샷 2025-04-02 오후 7 46 11](https://github.com/user-attachments/assets/a4d6b7a4-1417-420f-82de-07f88e018c4a)
+
      
    - 단건 일정 조회
-![스크린샷 2025-04-02 오후 7 46 27](https://github.com/user-attachments/assets/62675ad1-bac1-4896-8213-fdad07371a57)
+     
+    ![스크린샷 2025-04-02 오후 7 46 27](https://github.com/user-attachments/assets/62675ad1-bac1-4896-8213-fdad07371a57)
+
+
 
    - 일정 수정
-![스크린샷 2025-04-02 오후 7 46 41](https://github.com/user-attachments/assets/583ccb29-c81e-4638-8eb1-4970eb2e0015)
-![스크린샷 2025-04-02 오후 7 46 54](https://github.com/user-attachments/assets/ca8a372e-62f1-4bb6-93cc-ce93c00ba36b)
+     
+    ![스크린샷 2025-04-02 오후 7 46 41](https://github.com/user-attachments/assets/583ccb29-c81e-4638-8eb1-4970eb2e0015)
+    ![스크린샷 2025-04-02 오후 7 46 54](https://github.com/user-attachments/assets/ca8a372e-62f1-4bb6-93cc-ce93c00ba36b)
+
      
    - 일정 삭제
-![스크린샷 2025-04-02 오후 7 47 38](https://github.com/user-attachments/assets/4cc90ea9-be60-4db5-be20-608a07b4ab31)
-![스크린샷 2025-04-02 오후 7 47 50](https://github.com/user-attachments/assets/920f5b27-6a30-403a-b13e-4f007acfb07e)
+     
+    ![스크린샷 2025-04-02 오후 7 47 38](https://github.com/user-attachments/assets/4cc90ea9-be60-4db5-be20-608a07b4ab31)
+    ![스크린샷 2025-04-02 오후 7 47 50](https://github.com/user-attachments/assets/920f5b27-6a30-403a-b13e-4f007acfb07e)
