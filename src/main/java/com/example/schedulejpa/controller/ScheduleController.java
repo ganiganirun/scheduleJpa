@@ -18,6 +18,7 @@ public class ScheduleController {
 
   private final ScheduleService scheduleService;
 
+  // 일정 생성
   @PostMapping
   public ResponseEntity<ScheduleResponseDto> saveSchedule(@RequestBody SchelduleRequestDto requestDto){
 
