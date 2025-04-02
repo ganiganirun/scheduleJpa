@@ -19,11 +19,23 @@ public class ScheduleResponseDto {
 
 
   // 필드가 final로 선언되어서 생성자가 필요
-  public ScheduleResponseDto(Schedule schedule) {
-    this.id = schedule.getId();
-    this.username = schedule.getUsername();
-    this.title = schedule.getTitle();
-    this.contents = schedule.getContents();
-    this.modifiedAt = schedule.getModifiedAt();
+//  public ScheduleResponseDto(Schedule schedule) {
+//    this.id = schedule.getId();
+//    this.username = schedule.getUsername();
+//    this.title = schedule.getTitle();
+//    this.contents = schedule.getContents();
+//    this.modifiedAt = schedule.getModifiedAt();
+//  }
+
+  public ScheduleResponseDto(Long id, String username, String title, String contents, LocalDateTime modifiedAt) {
+    this.id = id;
+    this.username = username;
+    this.title = title;
+    this.contents = contents;
+    this.modifiedAt = modifiedAt;
+  }
+
+  public static ScheduleResponseDto toDto(Schedule schedule){
+    return new ScheduleResponseDto(schedule.getId(),schedule.getUsername(), schedule.getTitle(), schedule.getContents(), schedule.getModifiedAt());
   }
 }
