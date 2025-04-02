@@ -12,10 +12,10 @@
         - 인증/인가 절차는 Cookie/Session을 활용하여 개발한다.
         - JPA 연관관계는 단방향으로 하고 필요시에만 양방향을 적용하도록 한다.
 3. API
-![스크린샷 2025-04-02 오후 2 20 18](https://github.com/user-attachments/assets/92590ecd-8ff6-48f1-88a4-a379c0d33ba0)
 
-![스크린샷 2025-04-02 오후 2 19 46](https://github.com/user-attachments/assets/4a354106-de73-4534-a5f5-7c7c81721c18)
+![스크린샷 2025-04-02 오후 2 24 43](https://github.com/user-attachments/assets/f953bbd1-77eb-48cb-94db-c925bc234c12)
 
+![스크린샷 2025-04-02 오후 2 25 05](https://github.com/user-attachments/assets/912c330a-d17b-4102-83b2-7914469d14f5)
 
    
 4. ERD
