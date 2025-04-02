@@ -8,8 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 
-@Entity
 @Getter
+@Entity
 @Table(name = "schedule")
 public class Schedule extends BaseEntity {
 
