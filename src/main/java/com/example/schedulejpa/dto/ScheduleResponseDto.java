@@ -17,6 +17,8 @@ public class ScheduleResponseDto {
 
   private final LocalDateTime modifiedAt;
 
+
+  // 필드가 final로 선언되어서 생성자가 필요
   public ScheduleResponseDto(Schedule schedule) {
     this.id = schedule.getId();
     this.username = schedule.getUsername();
