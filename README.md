@@ -11,13 +11,8 @@
         - CRUD 필수 기능은 모두 데이터 베이스 연결 및 JPA를 사용하여 개발한다.
         - 인증/인가 절차는 Cookie/Session을 활용하여 개발한다.
         - JPA 연관관계는 단방향으로 하고 필요시에만 양방향을 적용하도록 한다.
-3. API
-
-![스크린샷 2025-04-02 오후 2 24 43](https://github.com/user-attachments/assets/f953bbd1-77eb-48cb-94db-c925bc234c12)
-
-![스크린샷 2025-04-02 오후 2 25 05](https://github.com/user-attachments/assets/912c330a-d17b-4102-83b2-7914469d14f5)
-
-   
-4. ERD
-
-![스크린샷 2025-04-02 오후 2 20 48](https://github.com/user-attachments/assets/7f4c1513-bf1f-480d-b298-c644a0a35432)
+3. lv1 요구사항 정의
+   - 일정을 생성, 조회, 수정, 삭제 가능하다.
+   - 일정은 아래 필드를 가진다.
+      - 작성 유저명, 할일 제목, 할일 내용, 작성일, 수정일 필드
+      - 작성일, 수정일 필드는 JPA Auditing을 활용한다. 
