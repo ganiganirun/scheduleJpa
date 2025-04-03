@@ -8,8 +8,10 @@ import com.example.schedulejpa.repository.MemberRepository;
 import com.example.schedulejpa.repository.ScheduleRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @RequiredArgsConstructor
@@ -18,9 +20,9 @@ public class MemberService {
   private final MemberRepository memberRepository;
   private final ScheduleRepository scheduleRepository;
 
-  public SignUpResponseDto signUp(String username, String email) {
+  public SignUpResponseDto signUp(String username, String email, String password) {
 
-    Member member = new Member(username, email);
+    Member member = new Member(username, email, password);
 
     Member savedMember = memberRepository.save(member);
 
@@ -51,5 +53,17 @@ public class MemberService {
 
     scheduleRepository.deleteAll(findScheduleList);
     memberRepository.delete(findMember);
+  }
+
+  public void updatePassword(Long id, String oldPassword, String newPassword) {
+    Member findMember = memberRepository.findByIdOrElseThrow(id);
+
+    if(!findMember.getPassword().equals(oldPassword)){
+      throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
+    }
+
+    findMember.updatePassword(newPassword);
+
+
   }
 }
