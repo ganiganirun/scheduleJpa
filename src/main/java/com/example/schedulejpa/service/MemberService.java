@@ -55,6 +55,7 @@ public class MemberService {
     memberRepository.delete(findMember);
   }
 
+  @Transactional
   public void updatePassword(Long id, String oldPassword, String newPassword) {
     Member findMember = memberRepository.findByIdOrElseThrow(id);
 
