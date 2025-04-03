@@ -19,8 +19,8 @@ public class Schedule extends BaseEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY) //
   private Long id;
 
-  @Column(nullable = false)
-  private String username;
+//  @Column(nullable = false)
+//  private String username;
 
   @Column(nullable = false)
   private String title;
@@ -34,19 +34,20 @@ public class Schedule extends BaseEntity {
 
   public Schedule(){}
 
-  public Schedule(String username, String title, String contents){
-    this.username = username;
+  public Schedule(String title, String contents){
     this.title = title;
     this.contents = contents;
   }
 
-  public void updateSchedule(String username, String title, String contents){
-    this.username = username;
+  public void updateSchedule(String title, String contents){
     this.title = title;
     this.contents = contents;
   }
 
 
+  // 무슨 멤버를 넣어줄지 해주는 아이
+  // 누가 실제로 쓴건지 데이터에 대한 내용
+  // 값을 넣어주메
   public void setMember(Member member){
     this.member = member;
   }
