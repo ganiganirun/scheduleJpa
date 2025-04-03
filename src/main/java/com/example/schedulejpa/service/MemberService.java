@@ -39,4 +39,10 @@ public class MemberService {
         findMember.getModifiedAt()
     );
   }
+
+  public void deleteMember(Long id) {
+    Member findMember = memberRepository.findByIdOrElseThrow(id);
+
+    memberRepository.delete(findMember);
+  }
 }
