@@ -17,9 +17,11 @@ public class Member extends BaseEntity{
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  // 동명이인 가능
   @Column(nullable = false)
   private String username;
 
+  // 근데 같은 이메일은 불가능
   @Column(nullable = false, unique = true)
   private String email;
 
