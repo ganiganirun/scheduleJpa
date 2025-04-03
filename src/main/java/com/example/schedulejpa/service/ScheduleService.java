@@ -19,11 +19,10 @@ public class ScheduleService {
   private final ScheduleRepository scheduleRepository;
 
 
-  public ScheduleResponseDto saveSchedule(String username, String title, String contents) {
+  public ScheduleResponseDto saveSchedule(Long memberId, String title, String contents) {
 
-    Member findMember = memberRepository.findMemberByUsernameOrElseUsername(
-        username);
-    Schedule schedule = new Schedule(username, title, contents);
+    Member findMember = memberRepository.findByIdOrElseThrow(memberId);
+    Schedule schedule = new Schedule(title, contents);
     schedule.setMember(findMember);
     Schedule savedSchedule = scheduleRepository.save(schedule);
 
@@ -32,27 +31,26 @@ public class ScheduleService {
 
     return new ScheduleResponseDto(
         savedSchedule.getId(),
-        savedSchedule.getUsername(),
         savedSchedule.getTitle(),
         savedSchedule.getContents(),
         savedSchedule.getModifiedAt());
   }
 
-  public List<ScheduleResponseDto> findAll() {
+  public List<ScheduleResponseDto> findAll(Long memberId) {
+    scheduleRepository.findAll();
 
-    return scheduleRepository.findAll()
+    return scheduleRepository.findAllByMemberId(memberId)
         .stream()
         .map(ScheduleResponseDto::toDto)
         .toList();
   }
 
-  public ScheduleResponseDto findById(Long id) {
+  public ScheduleResponseDto findById(Long memberId, Long scheduleId) {
 
-    Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
+    Schedule findSchedule = scheduleRepository.findByMemberIdAndIdOrElseThrow(memberId,scheduleId);
 
     return new ScheduleResponseDto(
         findSchedule.getId(),
-        findSchedule.getUsername(),
         findSchedule.getTitle(),
         findSchedule.getContents(),
         findSchedule.getModifiedAt()
@@ -60,24 +58,23 @@ public class ScheduleService {
   }
 
   @Transactional
-  public ScheduleResponseDto updateSchedule(Long id, String username, String title, String contents) {
+  public ScheduleResponseDto updateSchedule(Long memberId ,Long scheduleId, String title, String contents) {
 
-    Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
+    Schedule findSchedule = scheduleRepository.findByMemberIdAndIdOrElseThrow(memberId,scheduleId);
 
-    findSchedule.updateSchedule(username,title,contents);
+    findSchedule.updateSchedule(title,contents);
 
     return new ScheduleResponseDto(
         findSchedule.getId(),
-        findSchedule.getUsername(),
         findSchedule.getTitle(),
         findSchedule.getContents(),
         findSchedule.getModifiedAt()
     );
   }
 
-  public void deleteSchedule(Long id) {
+  public void deleteSchedule(Long memberId, Long scheduleId) {
 
-    Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
+    Schedule findSchedule = scheduleRepository.findByMemberIdAndIdOrElseThrow(memberId,scheduleId);
 
     scheduleRepository.delete(findSchedule);
   }
