@@ -1,7 +1,9 @@
 package com.example.schedulejpa.service;
 
 import com.example.schedulejpa.dto.scheduledto.ScheduleResponseDto;
+import com.example.schedulejpa.entity.Member;
 import com.example.schedulejpa.entity.Schedule;
+import com.example.schedulejpa.repository.MemberRepository;
 import com.example.schedulejpa.repository.ScheduleRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -12,12 +14,17 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class ScheduleService {
 
+  private final MemberRepository memberRepository;
+
   private final ScheduleRepository scheduleRepository;
 
 
   public ScheduleResponseDto saveSchedule(String username, String title, String contents) {
 
+    Member findMember = memberRepository.findMemberByUsernameOrElseUsername(
+        username);
     Schedule schedule = new Schedule(username, title, contents);
+    schedule.setMember(findMember);
     Schedule savedSchedule = scheduleRepository.save(schedule);
 
 //    // 트랜젝션이 끝나면 jpa의 변경 감지 기능을 사용할 수 없음...
