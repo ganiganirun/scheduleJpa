@@ -25,6 +25,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 //        );
 //  }
 
+
   // Member_id와 id와 일치할시 optional로 감싼 schedule 객체를 반환
   Optional<Schedule> findByMemberIdAndId(Long memberId, Long scheduleId);
 
