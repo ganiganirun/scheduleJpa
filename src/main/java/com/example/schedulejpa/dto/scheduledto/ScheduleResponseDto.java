@@ -9,8 +9,6 @@ public class ScheduleResponseDto {
 
   private final Long id;
 
-  private final String username;
-
   private final String title;
 
   private final String contents;
@@ -19,15 +17,14 @@ public class ScheduleResponseDto {
 
 
   // 필드가 final로 선언되어서 생성자가 필요
-  public ScheduleResponseDto(Long id, String username, String title, String contents, LocalDateTime modifiedAt) {
+  public ScheduleResponseDto(Long id, String title, String contents, LocalDateTime modifiedAt) {
     this.id = id;
-    this.username = username;
     this.title = title;
     this.contents = contents;
     this.modifiedAt = modifiedAt;
   }
 
   public static ScheduleResponseDto toDto(Schedule schedule){
-    return new ScheduleResponseDto(schedule.getId(),schedule.getUsername(), schedule.getTitle(), schedule.getContents(), schedule.getModifiedAt());
+    return new ScheduleResponseDto(schedule.getId(), schedule.getTitle(), schedule.getContents(), schedule.getModifiedAt());
   }
 }
