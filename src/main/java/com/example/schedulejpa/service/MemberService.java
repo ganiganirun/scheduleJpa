@@ -1,6 +1,7 @@
 package com.example.schedulejpa.service;
 
 
+import com.example.schedulejpa.dto.memberdto.MemberResponseDto;
 import com.example.schedulejpa.dto.memberdto.SignUpResponseDto;
 import com.example.schedulejpa.entity.Member;
 import com.example.schedulejpa.repository.MemberRepository;
@@ -26,5 +27,16 @@ public class MemberService {
         savedMember.getModifiedAt()
     );
 
+  }
+
+  public MemberResponseDto findById(Long id) {
+
+    Member findMember = memberRepository.findByIdOrElseThrow(id);
+
+    return new MemberResponseDto(
+        findMember.getUsername(),
+        findMember.getEmail(),
+        findMember.getModifiedAt()
+    );
   }
 }
