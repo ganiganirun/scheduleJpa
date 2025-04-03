@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/schedules")
+@RequestMapping("/members/{memberId}/schedules")
 @RequiredArgsConstructor // final or @NonNull 이 붙은 필드만 매개변수로 받는 생성자 자동 생성 어노테이션
 public class ScheduleController {
 
@@ -25,11 +25,13 @@ public class ScheduleController {
 
   // 일정 생성
   @PostMapping
-  public ResponseEntity<ScheduleResponseDto> saveSchedule(@RequestBody SchelduleRequestDto requestDto){
-
+  public ResponseEntity<ScheduleResponseDto> saveSchedule(
+      @PathVariable Long memberId,
+      @RequestBody SchelduleRequestDto requestDto
+  ){
     ScheduleResponseDto scheduleResponseDto =
         scheduleService.saveSchedule(
-            requestDto.getUsername(),
+            memberId,
             requestDto.getTitle(),
             requestDto.getContents()
         );
@@ -39,44 +41,51 @@ public class ScheduleController {
 
   // 일정 전체 조회
   @GetMapping
-  public ResponseEntity<List<ScheduleResponseDto>> findAllSchedule(){
+  public ResponseEntity<List<ScheduleResponseDto>> findAllSchedule(@PathVariable Long memberId){
 
-    List<ScheduleResponseDto> scheduleResponseDtoList = scheduleService.findAll();
+    List<ScheduleResponseDto> scheduleResponseDtoList = scheduleService.findAll(memberId);
 
     return new ResponseEntity<>(scheduleResponseDtoList,HttpStatus.OK);
 
   }
 
   // 일정 선택 조회
-  @GetMapping("/{id}")
-  public ResponseEntity<ScheduleResponseDto> findByIdSchedule(@PathVariable Long id){
+  @GetMapping("/{scheduleId}")
+  public ResponseEntity<ScheduleResponseDto> findByIdSchedule(
+      @PathVariable Long memberId,
+      @PathVariable Long scheduleId
+  ){
 
-    ScheduleResponseDto findSchedule = scheduleService.findById(id);
+    ScheduleResponseDto findSchedule = scheduleService.findById(memberId, scheduleId);
 
     return new ResponseEntity<>(findSchedule,HttpStatus.OK);
   }
 
   // 일정 선택 수정
-  @PatchMapping("/{id}")
+  @PatchMapping("/{scheduleId}")
   public ResponseEntity<ScheduleResponseDto> updateSchedule(
-      @PathVariable Long id,
+      @PathVariable Long memberId,
+      @PathVariable Long scheduleId,
       @RequestBody SchelduleRequestDto requestDto
   ){
 
     ScheduleResponseDto scheduleResponseDto =
         scheduleService.updateSchedule(
-            id,
-            requestDto.getUsername(),
+            memberId,
+            scheduleId,
             requestDto.getTitle(),
             requestDto.getContents());
 
     return new ResponseEntity<>(scheduleResponseDto,HttpStatus.OK);
   }
 
-  @DeleteMapping("/{id}")
-  public ResponseEntity<Void> deleteSchedule(@PathVariable Long id){
+  @DeleteMapping("/{scheduleId}")
+  public ResponseEntity<Void> deleteSchedule(
+      @PathVariable Long memberId,
+      @PathVariable Long scheduleId
+  ){
 
-    scheduleService.deleteSchedule(id);
+    scheduleService.deleteSchedule(memberId,scheduleId);
 
     return new ResponseEntity<>(HttpStatus.OK);
   }
