@@ -1,7 +1,7 @@
 package com.example.schedulejpa.controller;
 
-import com.example.schedulejpa.dto.ScheduleResponseDto;
-import com.example.schedulejpa.dto.SchelduleRequestDto;
+import com.example.schedulejpa.dto.scheduledto.ScheduleResponseDto;
+import com.example.schedulejpa.dto.scheduledto.SchelduleRequestDto;
 import com.example.schedulejpa.service.ScheduleService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

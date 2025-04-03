@@ -1,6 +1,6 @@
 package com.example.schedulejpa.service;
 
-import com.example.schedulejpa.dto.ScheduleResponseDto;
+import com.example.schedulejpa.dto.scheduledto.ScheduleResponseDto;
 import com.example.schedulejpa.entity.Schedule;
 import com.example.schedulejpa.repository.ScheduleRepository;
 import java.util.List;
@@ -43,7 +43,13 @@ public class ScheduleService {
 
     Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
 
-    return new ScheduleResponseDto(findSchedule.getId(), findSchedule.getUsername(), findSchedule.getTitle(), findSchedule.getContents(), findSchedule.getModifiedAt());
+    return new ScheduleResponseDto(
+        findSchedule.getId(),
+        findSchedule.getUsername(),
+        findSchedule.getTitle(),
+        findSchedule.getContents(),
+        findSchedule.getModifiedAt()
+    );
   }
 
   @Transactional
@@ -53,7 +59,13 @@ public class ScheduleService {
 
     findSchedule.updateSchedule(username,title,contents);
 
-    return new ScheduleResponseDto(findSchedule.getId(),findSchedule.getUsername(),findSchedule.getTitle(),findSchedule.getContents(),findSchedule.getModifiedAt());
+    return new ScheduleResponseDto(
+        findSchedule.getId(),
+        findSchedule.getUsername(),
+        findSchedule.getTitle(),
+        findSchedule.getContents(),
+        findSchedule.getModifiedAt()
+    );
   }
 
   public void deleteSchedule(Long id) {
