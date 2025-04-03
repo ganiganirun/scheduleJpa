@@ -1,24 +1,23 @@
 package com.example.schedulejpa.repository;
 
 import com.example.schedulejpa.entity.Member;
-import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
-  Optional<Member> findMemberByUsername(String username);
-
-  default Member findMemberByUsernameOrElseUsername(String username){
-    return findMemberByUsername(username)
-        .orElseThrow(()->
-            new ResponseStatusException(
-                HttpStatus.NOT_FOUND,
-                "Does not exit username = " + username
-            )
-        );
-  }
+//  Optional<Member> findMemberByUsername(String username);
+//
+//  default Member findMemberByUsernameOrElseUsername(String username){
+//    return findMemberByUsername(username)
+//        .orElseThrow(()->
+//            new ResponseStatusException(
+//                HttpStatus.NOT_FOUND,
+//                "Does not exit username = " + username
+//            )
+//        );
+//  }
 
 
   default Member findByIdOrElseThrow(Long id){
