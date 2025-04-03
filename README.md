@@ -14,3 +14,12 @@
 3. lv3 요구사항 정의
    - 유저에 비밀번호 필드를 추가합니다.
     - 비밀번호 암호화는 도전 기능에서 수행합니다.
+4. 유저 등록
+
+![스크린샷 2025-04-03 오후 7 33 16](https://github.com/user-attachments/assets/cbf46431-57a1-4b6e-8e9f-7dca8c13d0d0)
+![스크린샷 2025-04-03 오후 7 34 00](https://github.com/user-attachments/assets/1399537a-ca7d-4f0a-8fbb-4d959387ed30)
+
+5. 비밀번호 수정
+
+![스크린샷 2025-04-03 오후 7 34 32](https://github.com/user-attachments/assets/4d349124-23db-4e3a-a371-0250981d164f)
+![스크린샷 2025-04-03 오후 7 34 58](https://github.com/user-attachments/assets/eab9954e-7b3b-4574-a573-c64b55aa56d7)
