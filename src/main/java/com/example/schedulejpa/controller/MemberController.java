@@ -1,11 +1,15 @@
 package com.example.schedulejpa.controller;
 
 
+import com.example.schedulejpa.common.Const;
+import com.example.schedulejpa.dto.logindto.LoginResponseDto;
 import com.example.schedulejpa.dto.memberdto.MemberResponseDto;
 import com.example.schedulejpa.dto.memberdto.SignUpRequestDto;
 import com.example.schedulejpa.dto.memberdto.SignUpResponseDto;
 import com.example.schedulejpa.dto.memberdto.UpdatePasswordRequestDto;
 import com.example.schedulejpa.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 @RestController
 @RequestMapping("/members")
@@ -38,9 +43,12 @@ public class MemberController {
     return new ResponseEntity<>(signUpResponseDto, HttpStatus.CREATED);
   }
 
-  @GetMapping("/{id}")
-  public ResponseEntity<MemberResponseDto> findById(@PathVariable Long id){
-    MemberResponseDto memberResponseDto = memberService.findById(id);
+  @GetMapping
+  public ResponseEntity<MemberResponseDto> findById(
+      @SessionAttribute(name = Const.LOGIN_USER, required = false)LoginResponseDto loginUser
+      ){
+
+    MemberResponseDto memberResponseDto = memberService.findById(loginUser.getId());
 
     return new ResponseEntity<>(memberResponseDto, HttpStatus.OK);
 
@@ -48,18 +56,18 @@ public class MemberController {
 
   @PatchMapping("/{id}")
   public ResponseEntity<Void> updatePassword(
-      @PathVariable Long id,
+      @SessionAttribute(name = Const.LOGIN_USER, required = false)LoginResponseDto loginUser,
       @RequestBody UpdatePasswordRequestDto passwordRequestDto
   ){
 
-    memberService.updatePassword(id, passwordRequestDto.getOldPassword(), passwordRequestDto.getNewPassword());
+    memberService.updatePassword(loginUser.getId(), passwordRequestDto.getOldPassword(), passwordRequestDto.getNewPassword());
 
     return new ResponseEntity<>(HttpStatus.OK);
   }
 
-  @DeleteMapping("/{id}")
-  public ResponseEntity<Void> deleteMember(@PathVariable Long id){
-    memberService.deleteMember(id);
+  @DeleteMapping
+  public ResponseEntity<Void> deleteMember(@SessionAttribute(name = Const.LOGIN_USER, required = false)LoginResponseDto loginUser){
+    memberService.deleteMember(loginUser.getId());
 
     return new ResponseEntity<>(HttpStatus.OK);
   }

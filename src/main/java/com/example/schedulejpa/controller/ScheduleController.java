@@ -1,5 +1,7 @@
 package com.example.schedulejpa.controller;
 
+import com.example.schedulejpa.common.Const;
+import com.example.schedulejpa.dto.logindto.LoginResponseDto;
 import com.example.schedulejpa.dto.scheduledto.ScheduleResponseDto;
 import com.example.schedulejpa.dto.scheduledto.SchelduleRequestDto;
 import com.example.schedulejpa.service.ScheduleService;
@@ -15,9 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 @RestController
-@RequestMapping("/members/{memberId}/schedules")
+@RequestMapping("/schedules")
 @RequiredArgsConstructor // final or @NonNull 이 붙은 필드만 매개변수로 받는 생성자 자동 생성 어노테이션
 public class ScheduleController {
 
@@ -26,12 +29,12 @@ public class ScheduleController {
   // 일정 생성
   @PostMapping
   public ResponseEntity<ScheduleResponseDto> saveSchedule(
-      @PathVariable Long memberId,
+      @SessionAttribute(name = Const.LOGIN_USER, required = false) LoginResponseDto loginUser,
       @RequestBody SchelduleRequestDto requestDto
   ){
     ScheduleResponseDto scheduleResponseDto =
         scheduleService.saveSchedule(
-            memberId,
+            loginUser.getId(),
             requestDto.getTitle(),
             requestDto.getContents()
         );
@@ -41,9 +44,9 @@ public class ScheduleController {
 
   // 일정 전체 조회
   @GetMapping
-  public ResponseEntity<List<ScheduleResponseDto>> findAllSchedule(@PathVariable Long memberId){
+  public ResponseEntity<List<ScheduleResponseDto>> findAllSchedule(@SessionAttribute(name = Const.LOGIN_USER, required = false)LoginResponseDto loginUser){
 
-    List<ScheduleResponseDto> scheduleResponseDtoList = scheduleService.findAll(memberId);
+    List<ScheduleResponseDto> scheduleResponseDtoList = scheduleService.findAll(loginUser.getId());
 
     return new ResponseEntity<>(scheduleResponseDtoList,HttpStatus.OK);
 
@@ -52,11 +55,11 @@ public class ScheduleController {
   // 일정 선택 조회
   @GetMapping("/{scheduleId}")
   public ResponseEntity<ScheduleResponseDto> findByIdSchedule(
-      @PathVariable Long memberId,
+      @SessionAttribute(name = Const.LOGIN_USER, required = false)LoginResponseDto loginUser,
       @PathVariable Long scheduleId
   ){
 
-    ScheduleResponseDto findSchedule = scheduleService.findById(memberId, scheduleId);
+    ScheduleResponseDto findSchedule = scheduleService.findById(loginUser.getId(), scheduleId);
 
     return new ResponseEntity<>(findSchedule,HttpStatus.OK);
   }
@@ -64,14 +67,14 @@ public class ScheduleController {
   // 일정 선택 수정
   @PatchMapping("/{scheduleId}")
   public ResponseEntity<ScheduleResponseDto> updateSchedule(
-      @PathVariable Long memberId,
+      @SessionAttribute(name = Const.LOGIN_USER, required = false)LoginResponseDto loginUser,
       @PathVariable Long scheduleId,
       @RequestBody SchelduleRequestDto requestDto
   ){
 
     ScheduleResponseDto scheduleResponseDto =
         scheduleService.updateSchedule(
-            memberId,
+            loginUser.getId(),
             scheduleId,
             requestDto.getTitle(),
             requestDto.getContents());
@@ -81,11 +84,11 @@ public class ScheduleController {
 
   @DeleteMapping("/{scheduleId}")
   public ResponseEntity<Void> deleteSchedule(
-      @PathVariable Long memberId,
+      @SessionAttribute(name = Const.LOGIN_USER, required = false)LoginResponseDto loginUser,
       @PathVariable Long scheduleId
   ){
 
-    scheduleService.deleteSchedule(memberId,scheduleId);
+    scheduleService.deleteSchedule(loginUser.getId(),scheduleId);
 
     return new ResponseEntity<>(HttpStatus.OK);
   }
